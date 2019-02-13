@@ -22,6 +22,13 @@ html, body {
 }
 
 
+#loginContainer, a:hover {
+  color: #fff; text-decoration: none;
+}
+
+.bump64 {
+  margin-top:64px;
+}
 
 #signup {
   margin-top:64px;
@@ -63,6 +70,8 @@ h1 {text-transform:uppercase; color:#ff8100;}
 h3 {margin:2px 0px 4px 0px; padding:0px; text-transform:uppercase; color:#ff8100;}
 h4 {margin:2px 0px 4px 0px; padding:0px; text-transform:uppercase; color:#ff8100;}
 
+.formhead { margin: 8px 8px 16px 0px; padding: 8px 8px 0px 16px;}
+
 .txt300 { font-weight: 300;}
 .txt700 { font-weight: 700;}
 
@@ -79,3 +88,9 @@ a {
   font-weight: 300;
   color:#ff8100; 
 }
+
+a:hover {
+  font-weight: 300;
+  color:#cc5000; 
+}
+

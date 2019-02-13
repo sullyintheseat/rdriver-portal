@@ -20,7 +20,7 @@
               <button type="button" class="btn btn-orange btn-lg btn-block centered" v-on:click="login()">LOGIN</button>
             </div>
             <br/>
-            <router-link to="SignUp">GO TO SIGNUP</router-link>
+            <router-link to="SignUp" >GO TO SIGNUP</router-link>
             <router-view></router-view>
             <br/><br/>
           </div>
@@ -32,6 +32,7 @@
 
 <script>
 import {api} from '../utils/api.js'
+import {storage} from '../utils/storage.js'
 
 export default {
   name: 'Entry',
@@ -43,17 +44,27 @@ export default {
       }
     }
   },
+  created: function () {
+    
+  },
   methods: 
   {
     login() {
       let user = this.input.username;
       let pass = this.input.password;
       if(user != "" && pass != "") {
-        if(user === "matt" && pass === "test"){
-          alert('logged in');
-        } else {
-          alert('no dice');
-        }
+        api.rawPost(`/accountSettings/login`, {email: user, password: pass})
+          .then( response => {
+              this.userTemp = response.data;
+              storage.storeValue('acct', this.userTemp._id);
+              storage.storeValue('token', this.userTemp.token);
+              //storage.storeValue('userTemp', this.userTemp);
+              storage.storeValue('isGood', 'yes');
+              this.$router.push('Dashboard');
+            })
+          .catch(error => {
+            alert('No sser with that name exists')
+          });
       } else {
         alert(`A username and password must be present`);
       }
@@ -67,9 +78,11 @@ export default {
   width:100%;
   padding:16px 8px;
   background: url("../assets/signup.png") no-repeat;
+}
 
-  
-  
+a:visited {
+  font-weight: 300;
+  color:#fff; 
 }
 </style>
 
