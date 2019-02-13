@@ -184,7 +184,6 @@ export default {
         zip: this.input.zip,
         driverId: this.input.driverId
       };
-      console.log(user);
       api.put('/accountsettings/reguser', user)
       .then (response => {
         this.input = response.data;
